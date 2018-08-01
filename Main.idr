@@ -1,14 +1,11 @@
 
-
 data GlasType : (maxOz:Nat) -> Type where
   Tumbler : GlasType 10
   Cocktail : GlasType 5
   Highball : GlasType 15
 
-
 data Ingredient : Type where
   Rum : Ingredient
-
 
 data Ounce : Ingredient -> Type where
   Oz : (ingredient:Ingredient) -> Ounce ingredient 
@@ -17,7 +14,6 @@ data Ounce : Ingredient -> Type where
 data Drink : (glas : GlasType n ) -> Type where
   Negroni : Drink Tumbler
   GinTonic : Drink Highball
-
 
 data Glas : (glasType : GlasType n ) -> Type where
   MkGlas : (drink : Drink glasType) -> Glas glasType 
