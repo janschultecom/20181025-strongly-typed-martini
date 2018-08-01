@@ -4,12 +4,11 @@ data GlasType : (maxOz:Nat) -> Type where
   Cocktail : GlasType 5
   Highball : GlasType 15
 
-data Ingredient : Type where
-  Rum : Ingredient
+bigDrinkGlas : GlasType 15
+bigDrinkGlas = Highball
 
-data Ounce : Ingredient -> Type where
-  Oz : (ingredient:Ingredient) -> Ounce ingredient 
-
+bigDrinkGlasWrong : GlasType 15
+--bigDrinkGlasWrong = Cocktail 
 
 data Drink : (glas : GlasType n ) -> Type where
   Negroni : Drink Tumbler
@@ -26,4 +25,12 @@ glas : Glas Tumbler
 glas = pour Negroni 
 
 glasWrong : Glas Tumbler
---glasWrong = pour GinTonic 
+--glasWrong = pour GinTonic
+
+
+data Ingredient : Type where
+  Rum : Ingredient
+
+data Ounce : Ingredient -> Type where
+  Oz : (ingredient:Ingredient) -> Ounce ingredient 
+
