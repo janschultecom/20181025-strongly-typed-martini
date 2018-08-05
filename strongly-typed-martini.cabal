@@ -1,0 +1,15 @@
+name:                strongly-typed-martini
+version:             0.1.0.0
+homepage:            https://github.com/janschultecom/20181025-strongly-typed-martini
+license:             Apache
+license-file:        LICENSE
+author:              janschultecom
+cabal-version:       >=1.10
+extra-source-files:  README.md
+build-type:          Simple
+
+executable strongly-typed-martini
+  hs-source-dirs:      src/haskell
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
