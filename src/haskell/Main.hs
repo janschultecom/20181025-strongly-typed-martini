@@ -7,13 +7,13 @@ data GlasType = Tumbler
               | Cocktail
               | Highball
 
-{-@ measure glasSize @-}
-glasSize :: GlasType -> Int
-glasSize Tumbler = 10
-glasSize Cocktail = 5
-glasSize Highball = 15
+{-@ measure maxOz @-}
+maxOz :: GlasType -> Int
+maxOz Tumbler = 10
+maxOz Cocktail = 5
+maxOz Highball = 15
 
-{-@ type GlasTypeN N = {v: GlasType | N == glasSize v} @-}
+{-@ type GlasTypeN N = {v: GlasType | N == maxOz v} @-}
 
 {-@ bigDrinkGlas :: GlasTypeN 15 @-}
 bigDrinkGlas = Highball
