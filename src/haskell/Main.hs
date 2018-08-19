@@ -1,21 +1,22 @@
 module Main where
 
 main :: IO ()
-main = putStrLn "Hello World"
+main = putStrLn "Refinements types"
 
-{-@ type Nat = {v: Int | v >= 0} @-}
+data GlasType = Tumbler
+              | Cocktail
+              | Highball
 
-data GlasType = Tumbler Int 
-                | Cocktail Int
-                | Highball Int
-{-@ 
-data GlasType = Tumbler ({v: Nat | v == 10})
-                | Cocktail ({v: Nat | v == 5}) 
-                | Highball ({v: Nat | v == 15}) 
-@-}
+{-@ measure glasSize @-}
+glasSize :: GlasType -> Int
+glasSize Tumbler = 10
+glasSize Cocktail = 5
+glasSize Highball = 15
 
-{-@ bigDrinkGlas :: GlasType @-}
-bigDrinkGlas = Highball 15
+{-@ type GlasTypeN N = {v: GlasType | N == glasSize v} @-}
 
---{-@ bigDrinkGlasWrong :: GlasType @-}
---bigDrinkGlasWrong = Cocktail 6
+{-@ bigDrinkGlas :: GlasTypeN 15 @-}
+bigDrinkGlas = Highball
+
+--{-@ bigDrinkGlasWrong :: GlasTypeN 15 @-}
+--bigDrinkGlasWrong = Cocktail
