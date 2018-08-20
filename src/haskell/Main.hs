@@ -1,7 +1,7 @@
 module Main where
 
 main :: IO ()
-main = putStrLn "Refinements types"
+main = putStrLn "Refinement types"
 
 data GlasType = Tumbler
               | Cocktail
