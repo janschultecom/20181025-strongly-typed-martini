@@ -2,8 +2,7 @@
 
 module Main where
 
-main :: IO ()
-main = putStrLn "Refinement types"
+import Data.Set as Set hiding (size)
 
 data GlasType = Tumbler
               | Cocktail
@@ -43,7 +42,7 @@ validNegroni = Negroni :: Drink
 wrongNegroni = Negroni :: Drink
 -}
 
-data Ingredient = Rum
+data Ingredient = Rum | Gin | Campari | Vermouth deriving (Eq, Ord)
 
 data Ounce = Oz Ingredient
 
@@ -86,3 +85,35 @@ shaker2 = Mix 1 (Oz Rum) (Mix 1 (Oz Rum) Empty)
 {-@ shaker3 :: ShakerN Boston @-}
 shaker3 = Mix (Oz Rum) (Mix (Oz Rum) (Mix (Oz Rum) Empty)) -- will fail
 -}
+
+{-@ measure ingredients @-}
+ingredients :: Drink -> Set Ingredient
+ingredients Negroni = fromList [Gin, Vermouth, Campari]
+ingredients GinTonic = fromList [Gin]
+
+data Recipe = Recipe (Set Ingredient)
+
+{-@ measure ingredients2 @-}
+ingredients2 :: Recipe -> Set Ingredient
+ingredients2 (Recipe is) = is
+
+{-@ measure isRecipeForDrink @-}
+isRecipeForDrink :: Recipe -> Drink -> Bool
+isRecipeForDrink recipe drink = Set.intersection (ingredients2 recipe) (ingredients drink) == (ingredients drink)
+
+{-@ type RecipeN D = { r: Recipe | (isRecipeForDrink r D)} @-}
+
+{-@ goodNegroni :: RecipeN Negroni @-}
+goodNegroni :: Recipe
+goodNegroni = Recipe $ fromList [Vermouth, Campari, Gin]
+
+-- {-@ badNegroni :: RecipeN Negroni @-}
+badNegroni :: Recipe
+badNegroni = Recipe $ fromList [Vermouth, Gin]
+
+main :: IO ()
+main = putStrLn $ show $ Set.intersection (ingredients2 r) (ingredients d) == (ingredients d)
+    where 
+        r = goodNegroni
+        d = Negroni
+        
