@@ -2,7 +2,7 @@
 
 module Main where
 
-import Data.Set as Set hiding (size)
+import qualified Data.Set as S
 
 data GlasType = Tumbler
               | Cocktail
@@ -87,33 +87,39 @@ shaker3 = Mix (Oz Rum) (Mix (Oz Rum) (Mix (Oz Rum) Empty)) -- will fail
 -}
 
 {-@ measure ingredients @-}
-ingredients :: Drink -> Set Ingredient
-ingredients Negroni = fromList [Gin, Vermouth, Campari]
-ingredients GinTonic = fromList [Gin]
+ingredients :: Drink -> [Ingredient]
+ingredients Negroni = [Gin, Vermouth, Campari]
+ingredients GinTonic = [Gin]
 
-data Recipe = Recipe (Set Ingredient)
+--data Recipe = Recipe (Set Ingredient)
+type Recipe = [Ingredient]
 
-{-@ measure ingredients2 @-}
+{- {-@ measure ingredients2 @-}
 ingredients2 :: Recipe -> Set Ingredient
 ingredients2 (Recipe is) = is
 
 {-@ measure isRecipeForDrink @-}
 isRecipeForDrink :: Recipe -> Drink -> Bool
 isRecipeForDrink recipe drink = Set.intersection (ingredients2 recipe) (ingredients drink) == (ingredients drink)
+-}
 
-{-@ type RecipeN D = { r: Recipe | (isRecipeForDrink r D)} @-}
+{-@ measure elts @-}
+elts        :: (Ord a) => [a] -> S.Set a
+elts []     = S.empty
+elts (x:xs) = S.singleton x `S.union` elts xs
+
+{-@ type RecipeN D = { r: Recipe | S.isSubsetOf (elts D) (elts r) } @-}
 
 {-@ goodNegroni :: RecipeN Negroni @-}
 goodNegroni :: Recipe
-goodNegroni = Recipe $ fromList [Vermouth, Campari, Gin]
+--goodNegroni = Recipe ( fromList [Vermouth, Campari, Gin] )
+--goodNegroni = [Vermouth, Campari, Gin] 
+goodNegroni = [Gin, Vermouth, Campari] 
 
 -- {-@ badNegroni :: RecipeN Negroni @-}
 badNegroni :: Recipe
-badNegroni = Recipe $ fromList [Vermouth, Gin]
+--badNegroni = Recipe $ fromList [Vermouth, Gin]
+badNegroni = [Vermouth, Gin]
 
 main :: IO ()
-main = putStrLn $ show $ Set.intersection (ingredients2 r) (ingredients d) == (ingredients d)
-    where 
-        r = goodNegroni
-        d = Negroni
-        
+main = putStrLn ""
