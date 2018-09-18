@@ -108,7 +108,7 @@ elts        :: (Ord a) => [a] -> S.Set a
 elts []     = S.empty
 elts (x:xs) = S.singleton x `S.union` elts xs
 
-{-@ type RecipeN D = { r: Recipe | S.isSubsetOf (elts D) (elts r) } @-}
+{-@ type RecipeN D = { r: Recipe | S.isSubsetOf (elts (ingredients D)) (elts r) } @-}
 
 {-@ goodNegroni :: RecipeN Negroni @-}
 goodNegroni :: Recipe
