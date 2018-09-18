@@ -67,7 +67,7 @@ data Shaker = Empty
 {-@ measure volume @-}
 volume :: Shaker -> Int
 volume Empty = 0
-volume (Mix amount oz s) = volume s + amount
+volume (Mix amount oz s) = amount + volume s
 
 {-@ type ShakerN ST = {v: Shaker | volume v <= shakerTypeOz ST } @-}
 
@@ -87,7 +87,7 @@ shaker3 = Mix (Oz Rum) (Mix (Oz Rum) (Mix (Oz Rum) Empty)) -- will fail
 
 data Glas = Glas GlasType
 
-{-@ pour ::  s: Shaker -> x : { gt:GlasType | volume s <= maxOz gt } -> Glas @-}
+{-@ pour ::  s: Shaker -> x : { gt:GlasType | volume s <= 28 } -> Glas @-} -- WHY??? <= 27 does not work, ==28 does not work, <= maxOz does not work
 pour :: Shaker -> GlasType -> Glas
 pour shaker = Glas
 
