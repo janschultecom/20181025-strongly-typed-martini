@@ -4,9 +4,7 @@ module Main where
 
 import qualified Data.Set as S
 
-data GlasType = Tumbler
-              | Cocktail
-              | Highball
+data GlasType = Tumbler | Cocktail | Highball
 
 {-@ measure maxOz @-}
 maxOz :: GlasType -> Int
@@ -17,6 +15,7 @@ maxOz Highball = 15
 {-@ type GlasTypeN N = {v: GlasType | N == maxOz v} @-}
 
 {-@ bigDrinkGlas :: GlasTypeN 15 @-}
+bigDrinkGlas :: GlasType
 bigDrinkGlas = Highball
 
 {-
@@ -108,6 +107,22 @@ elts        :: (Ord a) => [a] -> S.Set a
 elts []     = S.empty
 elts (x:xs) = S.singleton x `S.union` elts xs
 
+
+negroniIngredients :: S.Set Ingredient
+negroniIngredients = S.fromList $ ingredients Negroni
+
+
+{-@ type Negroni = {r:Recipe | S.isSubsetOf (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (elts r) }  @-}
+{-@ goodNegroni :: Negroni @-}
+goodNegroni :: Recipe
+goodNegroni = [Vermouth, Rum, Gin, Campari] 
+
+--{-@ badNegroni :: Negroni @-}
+--badNegroni :: Recipe
+--badNegroni = [Vermouth, Gin]
+
+{-
+
 {-@ type RecipeN D = { r: Recipe | S.isSubsetOf (elts (ingredients D)) (elts r) } @-}
 
 {-@ goodNegroni :: RecipeN Negroni @-}
@@ -120,6 +135,7 @@ goodNegroni = [Gin, Vermouth, Campari]
 badNegroni :: Recipe
 --badNegroni = Recipe $ fromList [Vermouth, Gin]
 badNegroni = [Vermouth, Gin]
+-}
 
 main :: IO ()
 main = putStrLn ""
