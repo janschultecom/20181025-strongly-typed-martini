@@ -1,4 +1,8 @@
-resolver: lts-12.5
+resolver: ghc-8.2.2
 
 packages:
 - .
+
+extra-deps:
+- base-compat-0.10.4
+- markdown-unlit-0.5.0

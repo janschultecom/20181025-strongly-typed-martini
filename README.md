@@ -1,9 +1,7 @@
 A strongly typed martini. Shaken, not stirred. 🍸
 ===
 
-# Install Liquid Haskell
-
-Requirements:
+# Requirements
 
 1. SMTLIB2 compatible solver installed and its executable found on PATH (in our case [Z3](https://github.com/Z3Prover/z3))
 
@@ -22,14 +20,6 @@ In order to have `stack` installed executable availables we need to modify the `
 export PATH=$HOME/.local/bin:$PATH
 ```
 
-And now we proceed to install [Liquid Haskell](https://github.com/ucsd-progsys/liquidhaskell/blob/develop/INSTALL.md)
-
-```
-$ git clone --recursive https://github.com/ucsd-progsys/liquidhaskell.git ~/liquidhaskell
-$ cd ~/liquidhaskell
-$ stack install 
-```
-
 # Getting started
 
 (Please be sure you went through the upper section)
@@ -41,3 +31,9 @@ $ stack install
 ```
 
 So you can get the proper GHC version and dependencies installed.
+
+Then you can generate the slides with
+
+```
+$ stack exec -- make slides
+```

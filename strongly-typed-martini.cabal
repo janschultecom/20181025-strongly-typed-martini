@@ -13,6 +13,8 @@ executable strongly-typed-martini
     main-is: Main.hs
     hs-source-dirs: src/haskell
     default-language: Haskell2010
+    ghc-options: -pgmL markdown-unlit
     build-depends:
-        base >=4.7 && <5,
-        containers -any
+        base,
+        containers -any,
+        markdown-unlit
