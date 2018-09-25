@@ -75,23 +75,25 @@ volume (Mix amount oz s) = amount + volume s
 {-@ shaker0 :: ShakerN Boston @-}
 shaker0 = Empty
 
-{-@ shaker1 :: ShakerN Boston @-}
+{-@ shaker1 :: {s:ShakerN Boston | volume s == 10 } @-}
 shaker1 = Mix 10 (Oz Rum) Empty
 
 {-@ shaker2 :: ShakerN Boston @-}
 shaker2 = Mix 20 (Oz Rum) (Mix 7 (Oz Rum) Empty)
 
-{-
-{-@ shaker3 :: ShakerN Boston @-}
-shaker3 = Mix (Oz Rum) (Mix (Oz Rum) (Mix (Oz Rum) Empty)) -- will fail
--}
+
+--{-@ shaker3 :: ShakerN Boston @-}
+--shaker3 = Mix 20 (Oz Rum) (Mix 9 (Oz Rum) Empty) -- will fail
+
+
 
 data Glas = Glas GlasType
 
-{-@ pour ::  s: Shaker -> x : { gt:GlasType | volume s <= 28 } -> Glas @-} -- WHY??? <= 27 does not work, ==28 does not work, <= maxOz does not work
+{-@ pour ::  s: Shaker -> x : { gt:GlasType | volume s <= maxOz gt } -> Glas @-}
 pour :: Shaker -> GlasType -> Glas
 pour shaker = Glas
 
+{-@ validGlas :: Glas @-}
 validGlas :: Glas 
 validGlas = pour shaker1 Highball 
 
