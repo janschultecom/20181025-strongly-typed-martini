@@ -93,15 +93,6 @@ ingredients GinTonic = [Gin]
 --data Recipe = Recipe (Set Ingredient)
 type Recipe = [Ingredient]
 
-{- {-@ measure ingredients2 @-}
-ingredients2 :: Recipe -> Set Ingredient
-ingredients2 (Recipe is) = is
-
-{-@ measure isRecipeForDrink @-}
-isRecipeForDrink :: Recipe -> Drink -> Bool
-isRecipeForDrink recipe drink = Set.intersection (ingredients2 recipe) (ingredients drink) == (ingredients drink)
--}
-
 {-@ measure elts @-}
 elts        :: (Ord a) => [a] -> S.Set a
 elts []     = S.empty
@@ -113,6 +104,7 @@ negroniIngredients = S.fromList $ ingredients Negroni
 
 
 {-@ type Negroni = {r:Recipe | S.isSubsetOf (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (elts r) }  @-}
+--{-@ type Negroni = {r:Recipe | S.isSubsetOf negroniIngredients (elts r) }  @-}
 {-@ goodNegroni :: Negroni @-}
 goodNegroni :: Recipe
 goodNegroni = [Vermouth, Rum, Gin, Campari] 
@@ -120,22 +112,6 @@ goodNegroni = [Vermouth, Rum, Gin, Campari]
 --{-@ badNegroni :: Negroni @-}
 --badNegroni :: Recipe
 --badNegroni = [Vermouth, Gin]
-
-{-
-
-{-@ type RecipeN D = { r: Recipe | S.isSubsetOf (elts (ingredients D)) (elts r) } @-}
-
-{-@ goodNegroni :: RecipeN Negroni @-}
-goodNegroni :: Recipe
---goodNegroni = Recipe ( fromList [Vermouth, Campari, Gin] )
---goodNegroni = [Vermouth, Campari, Gin] 
-goodNegroni = [Gin, Vermouth, Campari] 
-
--- {-@ badNegroni :: RecipeN Negroni @-}
-badNegroni :: Recipe
---badNegroni = Recipe $ fromList [Vermouth, Gin]
-badNegroni = [Vermouth, Gin]
--}
 
 main :: IO ()
 main = putStrLn ""
