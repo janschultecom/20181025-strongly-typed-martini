@@ -41,7 +41,7 @@ validNegroni = Negroni :: Drink
 wrongNegroni = Negroni :: Drink
 -}
 
-data Ingredient = Rum | Gin | Campari | Vermouth deriving (Eq, Ord)
+data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
 
 data Ounce = Oz Ingredient
 
@@ -76,6 +76,7 @@ volume (Mix amount oz s) = amount + volume s
 shaker0 = Empty
 
 {-@ shaker1 :: {s:ShakerN Boston | volume s == 10 } @-}
+--{-@ shaker1 :: ShakerN Boston @-}
 shaker1 = Mix 10 (Oz Rum) Empty
 
 {-@ shaker2 :: ShakerN Boston @-}
@@ -96,34 +97,27 @@ pour shaker = Glas
 {-@ validGlas :: Glas @-}
 validGlas :: Glas 
 validGlas = pour shaker1 Highball 
+--validGlas = pour shaker11 Highball  
+--    where
+--        shaker11 = Mix 16 (Oz Rum) Empty
+
+type Recipe = S.Set Ingredient
 
 {-@ measure ingredients @-}
-ingredients :: Drink -> [Ingredient]
-ingredients Negroni = [Gin, Vermouth, Campari]
-ingredients GinTonic = [Gin]
+ingredients :: Drink -> Recipe
+ingredients Negroni = S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)
+ingredients GinTonic = S.union (S.singleton Gin) (S.singleton Tonic)
 
---data Recipe = Recipe (Set Ingredient)
-type Recipe = [Ingredient]
-
-{-@ measure elts @-}
-elts        :: (Ord a) => [a] -> S.Set a
-elts []     = S.empty
-elts (x:xs) = S.singleton x `S.union` elts xs
-
-
-negroniIngredients :: S.Set Ingredient
-negroniIngredients = S.fromList $ ingredients Negroni
-
-
-{-@ type Negroni = {r:Recipe | S.isSubsetOf (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (elts r) }  @-}
---{-@ type Negroni = {r:Recipe | S.isSubsetOf negroniIngredients (elts r) }  @-}
-{-@ goodNegroni :: Negroni @-}
+{-@ type RecipeN R = { x:Recipe | S.isSubsetOf (ingredients R) x } @-}
+{-@ goodNegroni :: RecipeN Negroni @-}
 goodNegroni :: Recipe
-goodNegroni = [Vermouth, Rum, Gin, Campari] 
+--goodNegroni = S.union (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (S.singleton Rum)
+goodNegroni = S.fromList [Vermouth, Rum, Gin, Campari]
 
 --{-@ badNegroni :: Negroni @-}
 --badNegroni :: Recipe
 --badNegroni = [Vermouth, Gin]
+
 
 main :: IO ()
 main = do 
