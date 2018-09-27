@@ -4,6 +4,8 @@ module Main where
 
 import qualified Data.Set as S
 
+-- EXERCISE 1 -- This is given
+
 data GlasType = Tumbler | CocktailGlas | Highball
 
 {-@ measure maxOz @-}
@@ -23,7 +25,6 @@ bigDrinkGlas = Highball
 bigDrinkGlasWrong = CocktailGlas
 -}
 
--- EXERCISE 1 -- This is given
 data Drink = Negroni | GinTonic
 
 -- EXERCISE 1 -- This has to be developed
@@ -188,8 +189,4 @@ glasOfNegroni3 = pour3 shaker5a GinTonic Highball
 -- EXERCISE 6 -- End
 
 main :: IO ()
-main = do
-    _ <- print "Volume shaker1 " *> print (volume shaker1)
-    _ <- print "maxOz Highball " *> print (maxOz Highball)
-    _ <- print "volume s <= maxOz gt " *> print (volume shaker1 <= maxOz Highball )
-    pure ()
+main = print "A strongly typed martini. Shaken, not stirred. 🍸"
