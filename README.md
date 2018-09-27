@@ -1,6 +1,20 @@
 A strongly typed martini. Shaken, not stirred. 🍸
 ===
 
+# Docker
+
+```
+# Clone this repo
+git clone https://github.com/janschultecom/20181025-strongly-typed-martini.git
+cd 20181025-strongly-typed-martini
+
+# Run the liquid haskell container and mount the directory
+docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
+
+# In the container check your liquid haskell file
+root@7d8d5dc51645:/data# liquid --full src/haskell/Main.hs
+```
+
 # Install Liquid Haskell
 
 Requirements:
