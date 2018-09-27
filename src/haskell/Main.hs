@@ -67,8 +67,7 @@ validBoston = Boston
 data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
 
 
-data Shaker = Empty
-            | Mix Int Ingredient Shaker
+data Shaker = Empty | Mix Int Ingredient Shaker
 
 -- EXERCISE 3            
 {-@ measure volume @-}
@@ -78,19 +77,19 @@ volume (Mix amount ingredient s) = amount + volume s
 
 {-@ type ShakerN ST = {v: Shaker | volume v <= shakerVarietyOz ST } @-}
 
+-- EXERCISE 3 -- Thats what we want to achieve 
 {-@ shaker0 :: ShakerN Boston @-}
 shaker0 = Empty
 
---{-@ shaker1 :: {s:ShakerN Boston | volume s == 10 } @-}
 {-@ shaker1 :: ShakerN Boston @-}
 shaker1 = Mix 28 Rum Empty
 
 {-@ shaker2 :: ShakerN Boston @-}
 shaker2 = Mix 20 Rum (Mix 7 Rum Empty)
 
-
 --{-@ shaker3 :: ShakerN Boston @-}
 --shaker3 = Mix 20 Rum (Mix 9 Rum Empty) -- will fail
+-- EXERCISE 3 -- Thats what we want to achieve 
 
 type Recipe = S.Set Ingredient
 
