@@ -4,32 +4,34 @@ module Main where
 
 import qualified Data.Set as S
 
--- EXERCISE 1 -- This is given
+-- EXAMPLE 1
 
-data GlasType = Tumbler | CocktailGlas | Highball
+data GlasVariety = Tumbler | CocktailGlas | Highball
 
 {-@ measure maxOz @-}
-maxOz :: GlasType -> Int
+maxOz :: GlasVariety -> Int
 maxOz Tumbler = 10
 maxOz CocktailGlas = 5
 maxOz Highball = 15
 
-{-@ type GlasTypeN N = {v: GlasType | N == maxOz v} @-}
+{-@ type GlasVarietyR N = {v: GlasVariety | N == maxOz v} @-}
 
-{-@ bigDrinkGlas :: GlasTypeN 15 @-}
-bigDrinkGlas :: GlasType
+{-@ bigDrinkGlas :: GlasVarietyR 15 @-}
+bigDrinkGlas :: GlasVariety
 bigDrinkGlas = Highball
 
 {-
-{-@ bigDrinkGlasWrong :: GlasTypeN 15 @-}
+{-@ bigDrinkGlasWrong :: GlasVarietyR 15 @-}
 bigDrinkGlasWrong = CocktailGlas
 -}
+
+-- EXERCISE 1 -- This is given
 
 data Drink = Negroni | GinTonic
 
 -- EXERCISE 1 -- This has to be developed
 {-@ measure glas @-}
-glas :: Drink -> GlasType
+glas :: Drink -> GlasVariety
 glas Negroni = Tumbler
 glas GinTonic = Highball
 
@@ -62,14 +64,13 @@ shakerVarietyOz Cobbler = 24
 {-@ validBoston :: ShakerVarietyR 28 @-}
 validBoston = Boston
 
---{-@ nonValidBoston :: ShakerVarietyR 29 @-}  -- will fail
---nonValidBoston = Boston -- will fail
+--{-@ nonValidBoston :: ShakerVarietyR 28 @-}  -- will fail
+--nonValidBoston = Cobbler -- will fail
 -- EXERCISE 2 -- End
 
 
 -- EXERCISE 3 -- This is given
 data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
-
 
 data Shaker = Empty | Mix Int Ingredient Shaker
             
@@ -98,7 +99,7 @@ shaker2 = Mix 20 Rum (Mix 7 Rum Empty)
 
 -- EXERCISE 3 -- End
 
--- EXERCISE 4 -- This is given
+-- EXAMPLE 2 -- This is given
 type Recipe = S.Set Ingredient
 
 {-@ measure ingredients @-}
@@ -115,7 +116,6 @@ goodNegroni = S.fromList [Vermouth, Rum, Gin, Campari]
 --{-@ badNegroni :: Negroni @-}
 --badNegroni :: Recipe
 --badNegroni = [Vermouth, Gin]
-
 
 
 -- EXERCISE 4 -- This has to be developed
@@ -136,13 +136,13 @@ shaker4 = Mix 2 Gin (Mix 10 Tonic Empty)
 
 -- EXERCISE 4 -- End
 
--- EXERCISE 5 -- This is given
+-- EXAMPLE 3 -- This is given
 type Content = S.Set Ingredient
-data Glas = Glas Drink GlasType Content
+data Glas = Glas Drink GlasVariety Content
 
-{-@ pour :: r:Drink ~> ShakerR r -> { d:Drink | r == d } -> gt:GlasType -> g : Glas @-}
-pour :: Shaker -> Drink -> GlasType -> Glas 
-pour shaker drink glasType = Glas drink glasType (contents shaker)
+{-@ pour :: r:Drink ~> ShakerR r -> { d:Drink | r == d } -> gv:GlasVariety -> g : Glas @-}
+pour :: Shaker -> Drink -> GlasVariety -> Glas 
+pour shaker drink glasVariety = Glas drink glasVariety (contents shaker)
 
 glasOfNegroni :: Glas 
 --glasOfNegroni = pour shaker4 Negroni Tumbler -- will fail
@@ -151,9 +151,9 @@ glasOfNegroni = pour shaker4 GinTonic Highball
 
 -- EXERCISE 5 -- This has to be developed
 
-{-@ pour2 :: r:Drink ~> ShakerR r -> dd : { d:Drink | r == d } -> { gt:GlasType | gt == glas dd } -> g : Glas @-}
-pour2 :: Shaker -> Drink -> GlasType -> Glas 
-pour2 shaker drink glasType = Glas drink glasType (contents shaker)
+{-@ pour2 :: r:Drink ~> ShakerR r -> dd : { d:Drink | r == d } -> { gv:GlasVariety | gv == glas dd } -> g : Glas @-}
+pour2 :: Shaker -> Drink -> GlasVariety -> Glas 
+pour2 shaker drink glasVariety = Glas drink glasVariety (contents shaker)
 
 
 -- EXERCISE 5 -- Thats what we want to achieve 
@@ -176,9 +176,9 @@ shaker5b = Mix 6 Gin (Mix 10 Tonic Empty)
 
 -- EXERCISE 6 -- This has to be developed
 
-{-@ pour3 :: r:Drink ~> s:ShakerR r -> dd : { d:Drink | r == d } -> { gt:GlasType | gt == glas dd && volume s <= maxOz gt } -> g : Glas @-}
-pour3 :: Shaker -> Drink -> GlasType -> Glas 
-pour3 shaker drink glasType = Glas drink glasType (contents shaker)
+{-@ pour3 :: r:Drink ~> s:ShakerR r -> dd : { d:Drink | r == d } -> { gv:GlasVariety | gv == glas dd && volume s <= maxOz gv } -> g : Glas @-}
+pour3 :: Shaker -> Drink -> GlasVariety -> Glas 
+pour3 shaker drink glasVariety = Glas drink glasVariety (contents shaker)
 
 -- EXERCISE 6 -- Thats what we want to achieve 
 
