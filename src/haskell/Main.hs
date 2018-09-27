@@ -23,6 +23,7 @@ bigDrinkGlas = Highball
 bigDrinkGlasWrong = CocktailGlas
 -}
 
+-- EXERCISE 1
 data Drink = Negroni | GinTonic
 
 {-@ measure glas @-}
@@ -32,6 +33,7 @@ glas GinTonic = Highball
 
 {-@ type DrinkR T = {v: Drink | T == glas v} @-}
 
+-- EXERCISE 1 -- Thats what we want to achieve 
 {-@ validNegroni :: DrinkR Tumbler @-}
 validNegroni = Negroni :: Drink
 
@@ -39,31 +41,10 @@ validNegroni = Negroni :: Drink
 {-@ wrongNegroni :: DrinkR Highball @-}
 wrongNegroni = Negroni :: Drink
 -}
-
-data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
-
---data Ounce = Oz Ingredient
+-- EXERCISE 1 -- Thats what we want to achieve 
 
 
-
-type Recipe = S.Set Ingredient
-
-{-@ measure ingredients @-}
-ingredients :: Drink -> Recipe
-ingredients Negroni = S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)
-ingredients GinTonic = S.union (S.singleton Gin) (S.singleton Tonic)
-
-{-@ type RecipeN R = { x:Recipe | S.isSubsetOf (ingredients R) x } @-}
-{-@ goodNegroni :: RecipeN Negroni @-}
-goodNegroni :: Recipe
---goodNegroni = S.union (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (S.singleton Rum)
-goodNegroni = S.fromList [Vermouth, Rum, Gin, Campari]
-
---{-@ badNegroni :: Negroni @-}
---badNegroni :: Recipe
---badNegroni = [Vermouth, Gin]
-
-
+-- EXERCISE 2
 data ShakerVariety = Boston | French | Cobbler
 
 {-@ measure shakerVarietyOz @-}
@@ -72,19 +53,24 @@ shakerVarietyOz Boston = 28
 shakerVarietyOz French = 20
 shakerVarietyOz Cobbler = 24
 
--- {-@ type ShakerTypeN N = {v: ShakerType | N == shakerVarietyOz v} @-}
+{-@ type ShakerVarietyR N = {v: ShakerVariety | N == shakerVarietyOz v} @-}
 
--- {-@ validBoston :: ShakerTypeN 28 @-}
--- validBoston = Boston
+-- EXERCISE 2 -- Thats what we want to achieve 
+{-@ validBoston :: ShakerVarietyR 28 @-}
+validBoston = Boston
 
-{-
-{-@ nonValidBoston :: ShakerTypeN 29 @-}
-nonValidBoston = Boston
--}
+--{-@ nonValidBoston :: ShakerVarietyR 29 @-}  -- will fail
+--nonValidBoston = Boston -- will fail
+-- EXERCISE 2 -- Thats what we want to achieve 
+
+
+data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
+
 
 data Shaker = Empty
             | Mix Int Ingredient Shaker
 
+-- EXERCISE 3            
 {-@ measure volume @-}
 volume :: Shaker -> Int
 volume Empty = 0
@@ -105,6 +91,24 @@ shaker2 = Mix 20 Rum (Mix 7 Rum Empty)
 
 --{-@ shaker3 :: ShakerN Boston @-}
 --shaker3 = Mix 20 Rum (Mix 9 Rum Empty) -- will fail
+
+type Recipe = S.Set Ingredient
+
+{-@ measure ingredients @-}
+ingredients :: Drink -> Recipe
+ingredients Negroni = S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)
+ingredients GinTonic = S.union (S.singleton Gin) (S.singleton Tonic)
+
+{-@ type RecipeN R = { x:Recipe | S.isSubsetOf (ingredients R) x } @-}
+{-@ goodNegroni :: RecipeN Negroni @-}
+goodNegroni :: Recipe
+--goodNegroni = S.union (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (S.singleton Rum)
+goodNegroni = S.fromList [Vermouth, Rum, Gin, Campari]
+
+--{-@ badNegroni :: Negroni @-}
+--badNegroni :: Recipe
+--badNegroni = [Vermouth, Gin]
+
 
 {-@ measure contents @-}
 contents :: Shaker -> S.Set Ingredient
