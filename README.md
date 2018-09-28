@@ -12,7 +12,7 @@ cd 20181025-strongly-typed-martini
 docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
 
 # In the container check your liquid haskell file
-root@7d8d5dc51645:/data# liquid --full src/haskell/Main.hs
+root@7d8d5dc51645:/data# liquid --full src/haskell/Exercise1.hs
 ```
 
 # Install Liquid Haskell
