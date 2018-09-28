@@ -5,7 +5,7 @@ A strongly typed martini. Shaken, not stirred. 🍸
 
 ```
 # Clone this repo
-git clone https://github.com/janschultecom/20181025-strongly-typed-martini.git
+git clone -b js/workshop-rindus https://github.com/janschultecom/20181025-strongly-typed-martini.git
 cd 20181025-strongly-typed-martini
 
 # Run the liquid haskell container and mount the directory
