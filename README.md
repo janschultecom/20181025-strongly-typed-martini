@@ -75,7 +75,7 @@ Working 150% [==================================================================
 **** RESULT: SAFE **************************************************************
 ```
 
-**If you see this, you are good to go 🙌 !** You don't have to do anything else! Everything else will be explained at the workshop. See you there!
+**If you see this, you are good to go 🙌 !** You don't have to do anything else! See you at the workshop!
 
 
 ## Install liquid haskell locally
