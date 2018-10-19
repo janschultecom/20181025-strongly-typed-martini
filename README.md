@@ -44,10 +44,13 @@ docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
 ```bash
 docker run -ti -v %cd%:/data janschultecom/docker-liquidhaskell:latest
 ```
-This will enter the command prompt of the container (it might look slightly different on your computer):
+This will start to download the liquid haskell docker container and enter the command prompt of the container:
 ```bash
 root@7d8d5dc51645:/data# 
 ```
+
+**Note**: This may take a few minutes and might look slightly different on your computer.
+
 
 In the container check the exercise liquid haskell file by running the `liquid` command:
 ```bash
