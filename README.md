@@ -17,7 +17,7 @@ Follow the instructions here: https://www.docker.com/get-started
 ## 2. Clone the workshop repository
 If you **are** familiar with git you can just clone the repository:
 
-```
+```bash
 git clone https://github.com/janschultecom/20181025-strongly-typed-martini.git
 cd 20181025-strongly-typed-martini
 ```
@@ -50,7 +50,7 @@ In the container check the exercise liquid haskell file by running the 'liquid' 
 root@7d8d5dc51645:/data# liquid --full src/haskell/Exercise1.hs
 ```
 You should now get the following output:
-```bash
+```
 **** DONE:  A-Normalization ****************************************************
 
 
@@ -67,7 +67,7 @@ Working 150% [==================================================================
 **** RESULT: SAFE **************************************************************
 ```
 
-**If you see this, you are good to go 🙌!** You don't have to do anything else! See you at the workshop!
+**If you see this, you are good to go 🙌 !** You don't have to do anything else! See you at the workshop!
 
 
 # Alternative installation
