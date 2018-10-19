@@ -1,28 +1,56 @@
 A strongly typed martini. Shaken, not stirred. 🍸
 ===
 
-Welcome to our workshop about liquid haskell. Our workshop is planned as a *beginner-friendly* hacking session where we want you to get your hands dirty coding liquid haskell. So 1st requirement: **please bring your laptop.**
+**Welcome!** This workshop is planned as a beginner-friendly hacking session where we want you to get your hands dirty coding liquid haskell. **Please bring your laptop to the workshop!**
 
-To not waste time on installation problems, we kindly ask you to **prepare for the workshop by following the installation instructions.**
+To not waste time on installation problems, we kindly ask you to [**follow the installation instructions.**](#installation-instructions)
 
 # Installation instructions
-The easiest way to get started is using docker. If you don't know about docker, you can think of it as a lightweight virtual machine. We have prepared a liquid haskell docker image that comes with everything preinstalled! 
+If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with everything preinstalled! 
 
-# Docker
+If you **are** familiar with haskell, you can proceed to the [alternative installation section](#alternative-installation) to install liquid haskell locally.
+
+
+## 1. Install docker
+Follow the instructions here: https://www.docker.com/get-started
+
+## 2. Clone the workshop repository
+If you **are** familiar with git you can just clone the repository:
 
 ```
-# Clone this repo
 git clone https://github.com/janschultecom/20181025-strongly-typed-martini.git
 cd 20181025-strongly-typed-martini
+```
 
-# Run the liquid haskell container and mount the directory
+If you **are not** familiar to git you can also download the repository as a zip file:
+
+    1. click on 'Clone or download' 
+    2. click on 'Download ZIP' 
+    3. unzip the file 
+    4. open the [command prompt](https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8)
+    5. change directory
+
+You can find more detailed instructions on how to clone or download a repository on [github](https://help.github.com/articles/cloning-a-repository/).
+
+## 3. Test the docker container
+
+Now that you got docker installed and the repository cloned, you can run the liquid haskell container:
+
+**Mac Os / Linux**
+```bash
 docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
+```
+**Windows**
+```bash
+docker run -ti -v %cd%:/data janschultecom/docker-liquidhaskell:latest
+```
 
-# In the container check the exercise liquid haskell file by running the 'liquid' command:
+In the container check the exercise liquid haskell file by running the 'liquid' command:
+```bash
 root@7d8d5dc51645:/data# liquid --full src/haskell/Exercise1.hs
 ```
 You should now get the following output:
-```
+```bash
 **** DONE:  A-Normalization ****************************************************
 
 
@@ -39,7 +67,7 @@ Working 150% [==================================================================
 **** RESULT: SAFE **************************************************************
 ```
 
-**If you see this, you are good to go 🙌! You don't have to do anything more! See you at the workshop! **
+**If you see this, you are good to go 🙌!** You don't have to do anything else! See you at the workshop!
 
 
 # Alternative installation
@@ -73,7 +101,7 @@ $ cd ~/liquidhaskell
 $ stack install 
 ```
 
-# Getting started
+## Getting started
 
 (Please be sure you went through the upper section)
 
