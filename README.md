@@ -6,15 +6,16 @@ A strongly typed martini. Shaken, not stirred. 🍸
 To not waste time on installation problems, we kindly ask you to [**follow the installation instructions.**](#installation-instructions)
 
 # Installation instructions
-If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with batteries included so you don't have to worry about installing anything! Please proceed to [install docker](#1.-install-docker).
+If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with batteries included so you don't have to worry about anything! Please proceed to [use docker image](#use-docker-image).
 
-If you **are** familiar with haskell, you can proceed to the [alternative installation section](#alternative-installation) to install liquid haskell locally.
+If you **are** familiar with haskell, you can proceed to [install liquid haskell locally](#install-liquid-haskell-locally).
 
+## Use docker image
 
-## 1. Install docker
-Follow the instructions here: https://www.docker.com/get-started
+### 1. Install docker
+If you **are not** using docker yet, install docker following the instructions here: https://www.docker.com/get-started.
 
-## 2. Clone the workshop repository
+### 2. Clone the workshop repository
 If you **are** familiar with git you can just clone the repository:
 
 ```bash
@@ -29,9 +30,9 @@ If you **are not** familiar with git you can also download the repository as a z
     3. unzip the file 
     4. open command prompt and change to the directory
 
-You can find more detailed instructions on how to clone or download a repository on [github](https://help.github.com/articles/cloning-a-repository/).
+You can find more detailed instructions on how to clone or download a repository here: https://help.github.com/articles/cloning-a-repository/.
 
-## 3. Test the docker container
+### 3. Test the docker container
 
 Now that you got docker installed and the repository cloned, you can run the liquid haskell container:
 
@@ -43,12 +44,12 @@ docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
 ```bash
 docker run -ti -v %cd%:/data janschultecom/docker-liquidhaskell:latest
 ```
-This will enter the container and you should see a command prompt (it might look slightly different):
+This will enter the command prompt of the container (it might look slightly different on your computer):
 ```bash
 root@7d8d5dc51645:/data# 
 ```
 
-In the container check the exercise liquid haskell file by running the 'liquid' command:
+In the container check the exercise liquid haskell file by running the `liquid` command:
 ```bash
 root@7d8d5dc51645:/data# liquid --full src/haskell/Exercise1.hs
 ```
@@ -71,12 +72,10 @@ Working 150% [==================================================================
 **** RESULT: SAFE **************************************************************
 ```
 
-**If you see this, you are good to go 🙌 !** You don't have to do anything else! See you at the workshop!
+**If you see this, you are good to go 🙌 !** You don't have to do anything else! Everything else will be explained at the workshop. See you there!
 
 
-# Alternative installation
-
-## Install Liquid Haskell
+## Install liquid haskell locally
 
 Requirements:
 
@@ -105,7 +104,7 @@ $ cd ~/liquidhaskell
 $ stack install 
 ```
 
-## Getting started
+### Getting started
 
 (Please be sure you went through the upper section)
 
