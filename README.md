@@ -8,7 +8,7 @@ To not waste time on installation problems, we kindly ask you to [**follow the i
 # Installation instructions
 If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with batteries included so you don't have to worry about anything! Please proceed to [use docker image](#use-docker-image).
 
-If you **are** familiar with haskell, you can proceed to [install liquid haskell locally](#install-liquid-haskell-locally).
+If you **are** familiar with haskell, you can *also* proceed to [install liquid haskell locally](#install-liquid-haskell-locally).
 
 ## Use docker image
 
