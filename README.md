@@ -22,13 +22,12 @@ git clone https://github.com/janschultecom/20181025-strongly-typed-martini.git
 cd 20181025-strongly-typed-martini
 ```
 
-If you **are not** familiar to git you can also download the repository as a zip file:
+If you **are not** familiar with git you can also download the repository as a zip file:
 
     1. click on 'Clone or download' 
     2. click on 'Download ZIP' 
     3. unzip the file 
-    4. open the [command prompt](https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8)
-    5. change directory
+    4. open command prompt and change to the directory
 
 You can find more detailed instructions on how to clone or download a repository on [github](https://help.github.com/articles/cloning-a-repository/).
 
@@ -44,12 +43,17 @@ docker run -ti -v $(PWD):/data janschultecom/docker-liquidhaskell:latest
 ```bash
 docker run -ti -v %cd%:/data janschultecom/docker-liquidhaskell:latest
 ```
+This will enter the container and you should see a command prompt (it might look slightly different):
+```bash
+root@7d8d5dc51645:/data# 
+```
 
 In the container check the exercise liquid haskell file by running the 'liquid' command:
 ```bash
 root@7d8d5dc51645:/data# liquid --full src/haskell/Exercise1.hs
 ```
-You should now get the following output:
+
+You should get the following output:
 ```
 **** DONE:  A-Normalization ****************************************************
 
@@ -112,3 +116,8 @@ $ stack install
 ```
 
 So you can get the proper GHC version and dependencies installed.
+
+Check the exercise liquid haskell file by running the 'liquid' command:
+```bash
+liquid --full src/haskell/Exercise1.hs
+```
