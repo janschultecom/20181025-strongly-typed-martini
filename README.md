@@ -3,7 +3,7 @@ A strongly typed martini. Shaken, not stirred. 🍸
 
 **Welcome!** This workshop is planned as a beginner-friendly hacking session where we want you to get your hands dirty coding liquid haskell. **Please bring your laptop to the workshop!**
 
-To not waste time on installation problems, we kindly ask you to [**follow the installation instructions.**](#installation-instructions)
+To not waste time on installation problems during the workshop, we kindly ask you to [perform the installation instructions](#installation-instructions) **before the workshop**. Thank you 🤗 !
 
 # Installation instructions
 If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with batteries included so you don't have to worry about anything! Please proceed to [use docker image](#use-docker-image).
