@@ -6,7 +6,7 @@ A strongly typed martini. Shaken, not stirred. 🍸
 To not waste time on installation problems, we kindly ask you to [**follow the installation instructions.**](#installation-instructions)
 
 # Installation instructions
-If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with everything preinstalled! 
+If you **are not** familiar with haskell, the easiest and recommended way to get started is using docker. We have prepared a liquid haskell docker image that comes with batteries included so you don't have to worry about installing anything! Please proceed to [install docker](#1.-install-docker).
 
 If you **are** familiar with haskell, you can proceed to the [alternative installation section](#alternative-installation) to install liquid haskell locally.
 
