@@ -70,7 +70,7 @@ validBoston = Boston
 
 
 -- EXERCISE 3 -- This is given
-data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
+data Ingredient = AppleJuice | WhiteGrapeJuice | SanBitter | RedGrapeJuice | Tonic deriving (Eq, Ord)
 
 data Shaker = Empty | Mix Int Ingredient Shaker
             
@@ -84,13 +84,13 @@ data Shaker = Empty | Mix Int Ingredient Shaker
 --shaker0 = Empty
 
 --{-@ shaker1 :: ShakerN Boston @-}
---shaker1 = Mix 28 Rum Empty
+--shaker1 = Mix 28 AppleJuice Empty
 
 --{-@ shaker2 :: ShakerN Boston @-}
---shaker2 = Mix 20 Rum (Mix 7 Rum Empty)
+--shaker2 = Mix 20 AppleJuice (Mix 7 AppleJuice Empty)
 
 --{-@ shaker3 :: ShakerN Boston @-}
---shaker3 = Mix 20 Rum (Mix 9 Rum Empty) -- will fail
+--shaker3 = Mix 20 AppleJuice (Mix 9 AppleJuice Empty) -- will fail
 
 -- EXERCISE 3 -- End
 

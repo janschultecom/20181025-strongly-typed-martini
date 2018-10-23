@@ -128,11 +128,11 @@ liquid --full src/haskell/Exercise1.hs
 
 If you have trouble using the installation methods, you can alternatively use the web editor. Please bear in mind that **the server is a little flaky and might not work reliably during the workshop**.
 
-* [Exercise 1](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540301931_183.hs)
-* [Exercise 2](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540301983_184.hs)
-* [Exercise 3](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540302027_185.hs)
-* [Exercise 4](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540302077_187.hs)
-* [Exercise 5](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540302124_189.hs)
-* [Exercise 6](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540302172_191.hs)
+* [Exercise 1](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306517_204.hs)
+* [Exercise 2](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306538_207.hs)
+* [Exercise 3](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306560_210.hs)
+* [Exercise 4](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306578_213.hs)
+* [Exercise 5](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306872_220.hs)
+* [Exercise 6](http://goto.ucsd.edu:8090/index.html#?demo=permalink%2F1540306624_218.hs)
 
 **Note**: If you see an odd/even example, please refresh your browser.
