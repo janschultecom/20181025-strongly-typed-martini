@@ -70,7 +70,7 @@ validBoston = Boston
 
 
 -- EXERCISE 3 -- This is given
-data Ingredient = AppleJuice | WhiteGrapeJuice | Campari | RedGrapeJuice | Tonic deriving (Eq, Ord)
+data Ingredient = AppleJuice | WhiteGrapeJuice | SanBitter | RedGrapeJuice | Tonic deriving (Eq, Ord)
 
 data Shaker = Empty | Mix Int Ingredient Shaker
             
@@ -104,14 +104,14 @@ type Recipe = S.Set Ingredient
 
 {-@ measure ingredients @-}
 ingredients :: Drink -> Recipe
-ingredients Negroni = S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton Campari)
+ingredients Negroni = S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton SanBitter)
 ingredients GinTonic = S.union (S.singleton WhiteGrapeJuice) (S.singleton Tonic)
 
 {-@ type RecipeN R = { x:Recipe | S.isSubsetOf (ingredients R) x } @-}
 {-@ goodNegroni :: RecipeN Negroni @-}
 goodNegroni :: Recipe
---goodNegroni = S.union (S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton Campari)) (S.singleton AppleJuice)
-goodNegroni = S.fromList [RedGrapeJuice, AppleJuice, WhiteGrapeJuice, Campari]
+--goodNegroni = S.union (S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton SanBitter)) (S.singleton AppleJuice)
+goodNegroni = S.fromList [RedGrapeJuice, AppleJuice, WhiteGrapeJuice, SanBitter]
 
 --{-@ badNegroni :: RecipeN Negroni @-}
 --badNegroni :: Recipe
