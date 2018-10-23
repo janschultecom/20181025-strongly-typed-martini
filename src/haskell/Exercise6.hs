@@ -70,7 +70,7 @@ validBoston = Boston
 
 
 -- EXERCISE 3 -- This is given
-data Ingredient = Rum | Gin | Campari | Vermouth | Tonic deriving (Eq, Ord)
+data Ingredient = AppleJuice | WhiteGrapeJuice | SanBitter | RedGrapeJuice | Tonic deriving (Eq, Ord)
 
 data Shaker = Empty | Mix Int Ingredient Shaker
             
@@ -89,13 +89,13 @@ volume (Mix amount ingredient s) = amount + volume s
 shaker0 = Empty
 
 {-@ shaker1 :: ShakerN Boston @-}
-shaker1 = Mix 28 Rum Empty
+shaker1 = Mix 28 AppleJuice Empty
 
 {-@ shaker2 :: ShakerN Boston @-}
-shaker2 = Mix 20 Rum (Mix 7 Rum Empty)
+shaker2 = Mix 20 AppleJuice (Mix 7 AppleJuice Empty)
 
 --{-@ shaker3 :: ShakerN Boston @-}
---shaker3 = Mix 20 Rum (Mix 9 Rum Empty) -- will fail
+--shaker3 = Mix 20 AppleJuice (Mix 9 AppleJuice Empty) -- will fail
 
 -- EXERCISE 3 -- End
 
@@ -104,18 +104,18 @@ type Recipe = S.Set Ingredient
 
 {-@ measure ingredients @-}
 ingredients :: Drink -> Recipe
-ingredients Negroni = S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)
-ingredients GinTonic = S.union (S.singleton Gin) (S.singleton Tonic)
+ingredients Negroni = S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton SanBitter)
+ingredients GinTonic = S.union (S.singleton WhiteGrapeJuice) (S.singleton Tonic)
 
 {-@ type RecipeN R = { x:Recipe | S.isSubsetOf (ingredients R) x } @-}
 {-@ goodNegroni :: RecipeN Negroni @-}
 goodNegroni :: Recipe
---goodNegroni = S.union (S.union (S.union (S.singleton Gin) (S.singleton Vermouth)) (S.singleton Campari)) (S.singleton Rum)
-goodNegroni = S.fromList [Vermouth, Rum, Gin, Campari]
+--goodNegroni = S.union (S.union (S.union (S.singleton WhiteGrapeJuice) (S.singleton RedGrapeJuice)) (S.singleton SanBitter)) (S.singleton AppleJuice)
+goodNegroni = S.fromList [RedGrapeJuice, AppleJuice, WhiteGrapeJuice, SanBitter]
 
---{-@ badNegroni :: Negroni @-}
+--{-@ badNegroni :: RecipeN Negroni @-}
 --badNegroni :: Recipe
---badNegroni = [Vermouth, Gin]
+--badNegroni = S.fromList [RedGrapeJuice, WhiteGrapeJuice]
 
 
 -- EXERCISE 4 -- This has to be developed
@@ -131,8 +131,8 @@ contents (Mix amount ingredient rest) = S.union (S.singleton ingredient) (conten
 -- EXERCISE 4 -- Thats what we want to achieve 
 {-@ shaker4 :: ShakerR GinTonic @-}
 shaker4 :: Shaker
-shaker4 = Mix 2 Gin (Mix 10 Tonic Empty)
---shaker4 = Mix 2 Gin Empty -- will fail
+shaker4 = Mix 2 WhiteGrapeJuice (Mix 10 Tonic Empty)
+--shaker4 = Mix 2 WhiteGrapeJuice Empty -- will fail
 
 -- EXERCISE 4 -- End
 
@@ -167,11 +167,11 @@ glasOfNegroni2 = pour2 shaker4 GinTonic Highball
 
 {-@ shaker5a :: {s:ShakerR GinTonic | volume s == 15 } @-}
 shaker5a :: Shaker
-shaker5a = Mix 5 Gin (Mix 10 Tonic Empty)
+shaker5a = Mix 5 WhiteGrapeJuice (Mix 10 Tonic Empty)
 
 {-@ shaker5b :: {s:ShakerR GinTonic | volume s == 16 } @-}
 shaker5b :: Shaker
-shaker5b = Mix 6 Gin (Mix 10 Tonic Empty)
+shaker5b = Mix 6 WhiteGrapeJuice (Mix 10 Tonic Empty)
 
 
 -- EXERCISE 6 -- This has to be developed
